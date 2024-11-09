@@ -87,7 +87,8 @@ public class TokenIntrospectionValidation(IHttpContextAccessor httpContextAccess
 
         if (!string.IsNullOrWhiteSpace(clientId))
         {
-            var client = _clientStore.Clients.FirstOrDefault(x => x.ClientId == parseClientId);
+            var client = _clientStore.Clients.FirstOrDefault(x => x.ClientId == clientId);
+            //var client = _clientStore.Clients.FirstOrDefault(x => x.ClientId == parseClientId);
 
             if (client is not null)
             {

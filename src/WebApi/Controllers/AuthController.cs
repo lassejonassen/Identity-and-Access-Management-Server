@@ -14,6 +14,16 @@ public class AuthController : ControllerBase
     private readonly ICodeStoreService _codeStoreService;
     private readonly IUserService _userService;
 
+    public AuthController(IHttpContextAccessor httpContextAccessor,
+        IAuthorizeResultService authorizeResultService,
+        ICodeStoreService codeStoreService,
+        IUserService userService)
+    {
+        _httpContextAccessor = httpContextAccessor;
+        _authorizeResultService = authorizeResultService;
+        _codeStoreService = codeStoreService;
+        _userService = userService;
+    }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login(OpenIdConnectLoginRequest loginRequest)

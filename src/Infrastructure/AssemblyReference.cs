@@ -1,10 +1,15 @@
 ﻿using Application.Abstractions.Services;
+using Domain.Modules.Users;
+using Infrastructure.Abstractions.Services;
 using Infrastructure.Abstractions.Validations;
 using Infrastructure.Ldap;
 using Infrastructure.Options;
 using Infrastructure.Services;
 using Infrastructure.Validations.BearerTokenUsageType;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Persistence.DbContexts;
 
 namespace Infrastructure;
 
@@ -15,6 +20,7 @@ public static class AssemblyReference
         services.AddOptions();
         services.AddServices();
         services.AddValidations();
+        services.AddAspNetCoreIdentity();
 
         return services;
     }
@@ -32,6 +38,7 @@ public static class AssemblyReference
         services.AddScoped<IUserInfoService, UserInfoService>();
         services.AddScoped<IClientService, ClientService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IUserManagerService, UserManagerService>();
 
         return services;
     }
@@ -45,6 +52,21 @@ public static class AssemblyReference
 
     private static IServiceCollection AddAspNetCoreIdentity(this IServiceCollection services)
     {
+        services.AddIdentity<User, IdentityRole>(o =>
+        {
+            o.SignIn.RequireConfirmedEmail = false;
+            o.Password.RequireDigit = true;
+            o.Password.RequireLowercase = true;
+            o.Password.RequiredLength = 8;
+            o.Password.RequireUppercase = false;
+            o.Password.RequireNonAlphanumeric = false;
+            o.Lockout.MaxFailedAccessAttempts = 5;
+            o.User.RequireUniqueEmail = true;
+        })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
+        return services;
     }
 }

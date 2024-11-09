@@ -25,6 +25,20 @@ public class TokenRevocationController : ControllerBase
     [HttpPost("revoke")]
     public async Task<IActionResult> RevokeToken()
     {
-        return Ok("");
+        var clientValidationResult = await _tokenRevocationValidation.ValidateAsync(_httpContextAccessor.HttpContext!);
+
+        if (!clientValidationResult.Succeeded)
+        {
+            return Unauthorized(clientValidationResult.Error);
+        }
+
+        var tokenRevokeResult = await _tokenRevocationService.RevokeTokenAsync(_httpContextAccessor.HttpContext!, clientValidationResult.Client.ClientId.ToString());
+
+        if (!tokenRevokeResult.Succeeded)
+        {
+            return NotFound(tokenRevokeResult.Error);
+        }
+
+        return Ok("token_revoked");
     }
 }

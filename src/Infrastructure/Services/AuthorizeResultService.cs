@@ -26,6 +26,17 @@ public class AuthorizeResultService : IAuthorizeResultService
     private readonly IOAuthTokenRepository _oAuthTokenRepository;
     private readonly IDeviceFlowRepository _deviceFlowsRepository;
 
+    public AuthorizeResultService(ICodeStoreService codeStoreService, IClientService clientService, OAuthServerOptions options,
+        IHttpContextAccessor httpContextAccessor, IOAuthTokenRepository oAuthTokenRepository, IDeviceFlowRepository deviceFlowsRepository)
+    {
+        _codeStoreService = codeStoreService;
+        _clientService = clientService;
+        _options = options;
+        _httpContextAccessor = httpContextAccessor;
+        _oAuthTokenRepository = oAuthTokenRepository;
+        _deviceFlowsRepository = deviceFlowsRepository;
+    }
+
     public AuthorizeResponse AuthorizeRequest(IHttpContextAccessor httpContextAccessor, AuthorizationRequest authorizationRequest)
     {
         AuthorizeResponse response = new AuthorizeResponse();
@@ -50,7 +61,7 @@ public class AuthorizeResultService : IAuthorizeResultService
             return response;
         }
 
-        if (!authorizationRequest.redirect_uri.IsRedirectUriStartWithHttps() && !httpContextAccessor.HttpContext.Request.IsHttps)
+        if (!authorizationRequest.redirect_uri.IsRedirectUriStartWithHttps() && !httpContextAccessor.HttpContext!.Request.IsHttps)
         {
             response.Error = ErrorTypeEnum.InvalidRequest.Name;
             response.ErrorDescription = "redirect url is not secure, MUST be TLS";
@@ -102,7 +113,7 @@ public class AuthorizeResultService : IAuthorizeResultService
             CodeChallenge = authorizationRequest.code_challenge,
             CodeChallengeMethod = authorizationRequest.code_challenge_method,
             CreationTime = DateTime.UtcNow,
-            Subject = httpContextAccessor.HttpContext.User //as ClaimsPrincipal
+            Subject = httpContextAccessor.HttpContext!.User //as ClaimsPrincipal
 
         };
 
@@ -159,7 +170,6 @@ public class AuthorizeResultService : IAuthorizeResultService
                 return result;
             }
 
-
             if (deviceCode.ExpireIn < DateTime.Now)
             {
                 result.Error = ErrorTypeEnum.InvalidRequest.Name;
@@ -169,7 +179,6 @@ public class AuthorizeResultService : IAuthorizeResultService
 
             var requestedScope = deviceCode.RequestedScope.Split(' ');
             IEnumerable<string> scopes = checkClientResult.Client.AllowedScopes.Intersect(requestedScope);
-
 
             var deviceflowAccessTokenResult = GenerateJsonWebToken(scopes, Constants.TokenTypes.JWTAccessToken, checkClientResult.Client, null);
             await SaveJsonWebTokenAsync(checkClientResult.Client.ClientId.ToString(), deviceflowAccessTokenResult.AccessToken, deviceflowAccessTokenResult.ExpirationDate);
@@ -203,12 +212,16 @@ public class AuthorizeResultService : IAuthorizeResultService
         // check code from the Concurrent Dictionary
         var clientCodeChecker = _codeStoreService.GetClientDataByCode(tokenRequest.code);
         if (clientCodeChecker == null)
+        {
             return new TokenResponse { Error = ErrorTypeEnum.InvalidGrant.Name };
+        }
 
         // check if the current client who is one made this authentication request
 
         if (tokenRequest.client_id != clientCodeChecker.ClientId)
+        {
             return new TokenResponse { Error = ErrorTypeEnum.InvalidGrant.Name };
+        }
 
         // TODO: 
         // also I have to check the rediret uri 
@@ -219,23 +232,29 @@ public class AuthorizeResultService : IAuthorizeResultService
                 clientCodeChecker.CodeChallenge, clientCodeChecker.CodeChallengeMethod);
 
             if (!pkceResult)
+            {
                 return new TokenResponse { Error = ErrorTypeEnum.InvalidGrant.Name };
+            }
         }
 
         string id_token = string.Empty;
         string userId = null;
         if (clientCodeChecker.IsOpenId)
         {
-            if (!clientCodeChecker.Subject.Identity.IsAuthenticated)
+            if (!clientCodeChecker.Subject.Identity!.IsAuthenticated)
+            {
                 // I have to inform the caller to redirect the user to the login page
                 return new TokenResponse { Error = ErrorTypeEnum.InvalidGrant.Name };
+            }
 
             var currentUserName = clientCodeChecker.Subject.Identity.Name;
 
-            userId = clientCodeChecker.Subject.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            userId = clientCodeChecker.Subject.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value!;
 
             if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(currentUserName))
+            {
                 return new TokenResponse { Error = ErrorTypeEnum.InvalidGrant.Name };
+            }
 
             // Generate Identity Token
             int iat = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
@@ -250,15 +269,18 @@ public class AuthorizeResultService : IAuthorizeResultService
 
             var claims = new List<Claim>()
                     {
-                        new Claim("sub", userId, ClaimValueTypes.String),
-                        new Claim("given_name", currentUserName, ClaimValueTypes.String),
-                        new Claim("iat", iat.ToString(), ClaimValueTypes.Integer), // time stamp
-                        new Claim("nonce", clientCodeChecker.Nonce, ClaimValueTypes.String)
+                        new("sub", userId, ClaimValueTypes.String),
+                        new("given_name", currentUserName, ClaimValueTypes.String),
+                        new("iat", iat.ToString(), ClaimValueTypes.Integer), // time stamp
+                        new("nonce", clientCodeChecker.Nonce, ClaimValueTypes.String)
                     };
-            foreach (var amr in amrs)
-                claims.Add(new Claim("amr", amr));// authentication
 
-            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            foreach (var amr in amrs)
+            {
+                claims.Add(new Claim("amr", amr));// authentication
+            }
+
+            var handler = new JwtSecurityTokenHandler();
 
             var token = new JwtSecurityToken(_options.IDPUri, checkClientResult.Client.ClientId.ToString(), claims,
                 expires: DateTime.UtcNow.AddMinutes(int.Parse("50")), signingCredentials: new
@@ -286,7 +308,7 @@ public class AuthorizeResultService : IAuthorizeResultService
                                      select m;
 
         var accessTokenResult = GenerateJsonWebToken(scopesinJWtAccessToken, Constants.TokenTypes.JWTAccessToken, checkClientResult.Client, userId);
-        SaveJsonWebTokenAsync(checkClientResult.Client.ClientId.ToString(), accessTokenResult.AccessToken, accessTokenResult.ExpirationDate);
+        await SaveJsonWebTokenAsync(checkClientResult.Client.ClientId.ToString(), accessTokenResult.AccessToken, accessTokenResult.ExpirationDate);
 
         // here remove the code from the Concurrent Dictionary
         _codeStoreService.RemoveClientDataByCode(tokenRequest.code);
@@ -348,7 +370,7 @@ public class AuthorizeResultService : IAuthorizeResultService
         {
             var claims = new List<Claim>
                 {
-                    new Claim("scope", string.Join(' ', scopes))
+                    new("scope", string.Join(' ', scopes))
                 };
 
             if (!string.IsNullOrEmpty(sub))

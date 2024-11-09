@@ -13,7 +13,7 @@ public sealed class BearerTokenUsageTypeValidation(IHttpContextAccessor httpCont
 
         var authorizationHeader = httpContextAccessor.HttpContext!.Request.Headers["Authorization"];
 
-        var header = authorizationHeader.First().Trim();
+        var header = authorizationHeader.First()?.Trim();
 
         if (header is not null
             && header.StartsWith(Constants.AuthenticatedRequestScheme.AuthorizationRequestHeader))

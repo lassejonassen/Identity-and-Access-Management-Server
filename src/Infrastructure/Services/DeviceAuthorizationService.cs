@@ -17,7 +17,9 @@ public class DeviceAuthorizationService : IDeviceAuthorizationService
     public async Task<bool> DeviceFlowUserInteractionAsync(string userCode)
     {
         if (string.IsNullOrWhiteSpace(userCode))
+        {
             return false;
+        }
 
         var data = await _deviceFlowRepository.GetByUserCodeAsync(userCode);
 
@@ -42,7 +44,7 @@ public class DeviceAuthorizationService : IDeviceAuthorizationService
         }
     }
 
-    public async Task<DeviceAuthorizationResponse> GenerateDeviceAuthorizationCodeAsync(HttpContext httpContext)
+    public async Task<DeviceAuthorizationResponse?> GenerateDeviceAuthorizationCodeAsync(HttpContext httpContext)
     {
         var validationResult = await _validation.ValidateAsync(httpContext);
 
@@ -92,7 +94,7 @@ public class DeviceAuthorizationService : IDeviceAuthorizationService
 
         for (int i = 0; i < lengthCount.Length; i++)
         {
-            lengthCount[i] = chars[random.Value.Next(chars.Length)];
+            lengthCount[i] = chars[random.Value!.Next(chars.Length)];
         }
 
         var result = new String(lengthCount);
@@ -108,10 +110,11 @@ public class DeviceAuthorizationService : IDeviceAuthorizationService
 
         for (int i = 0; i < lengthCount.Length; i++)
         {
-            lengthCount[i] = chars[random.Value.Next(chars.Length)];
+            lengthCount[i] = chars[random.Value!.Next(chars.Length)];
         }
 
-        var result = new String(lengthCount);
+        var result = new string(lengthCount);
+
         return result;
     }
 }

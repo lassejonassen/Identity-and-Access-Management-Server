@@ -5,8 +5,8 @@ namespace Infrastructure.Abstractions.Services;
 
 public interface ICodeStoreService
 {
-    string GenerateAuthorizationCode(AuthorizationCode authorizationCode);
-    AuthorizationCode GetClientDataByCode(string key);
-    AuthorizationCode UpdatedClientDataByCode(string key, ClaimsPrincipal claimsPrincipal, IList<string> requestdScopes);
-    AuthorizationCode RemoveClientDataByCode(string key);
+    string? GenerateAuthorizationCode(AuthorizationCode authorizationCode);
+    AuthorizationCode? GetClientDataByCode(string key);
+    AuthorizationCode? UpdatedClientDataByCode(string key, ClaimsPrincipal claimsPrincipal, IList<string> requestdScopes);
+    AuthorizationCode? RemoveClientDataByCode(string key);
 }

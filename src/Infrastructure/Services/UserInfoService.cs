@@ -35,7 +35,6 @@ public sealed class UserInfoService : IUserInfoService
         _logger = logger;
     }
 
-
     public async Task<UserInfoResponse> GetUserInfoAsync()
     {
         var response = new UserInfoResponse();
@@ -118,8 +117,8 @@ public sealed class UserInfoService : IUserInfoService
 
                     response.Sub = userId;
                     response.EmailVerified = false;
-                    response.Email = user.Value.Email;
-                    response.Name = user.Value.Email;
+                    response.Email = user.Value.Email!;
+                    response.Name = user.Value.Email!;
                 }
             }
             catch (Exception ex)

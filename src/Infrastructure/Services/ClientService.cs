@@ -63,7 +63,7 @@ public sealed class ClientService : IClientService
         return new AudienceValidator(handler);
     }
 
-    public CheckClientResult VerifyClientById(string clientId, bool checkWithSecret = false, string clientSecret = null, string grantType = null)
+    public CheckClientResult VerifyClientById(string clientId, bool checkWithSecret = false, string clientSecret = "", string grantType = "")
     {
         CheckClientResult result = new() { IsSuccess = false };
 
@@ -71,11 +71,19 @@ public sealed class ClientService : IClientService
                 grantType == AuthorizationGrantTypesEnum.ClientCredentials.Name)
         {
             var data = _httpContextAccessor.HttpContext;
-            var authHeader = data.Request.Headers["Authorization"].ToString();
+            var authHeader = data?.Request.Headers["Authorization"].ToString();
+            
             if (authHeader == null)
+            {
                 return result;
+
+            }
+
             if (!authHeader.StartsWith("Basic", StringComparison.OrdinalIgnoreCase))
+            {
                 return result;
+
+            }
 
             var parameters = authHeader.Substring("Basic ".Length);
             var authorizationKeys = Encoding.UTF8.GetString(Convert.FromBase64String(parameters));

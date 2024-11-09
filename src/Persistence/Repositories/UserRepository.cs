@@ -16,7 +16,7 @@ public sealed class UserRepository(ApplicationDbContext context)
             return Result.Failure<User>(UserErrors.InvalidIdFormat);
         }
 
-        var user = await context.Users.FirstOrDefaultAsync(u => u.Id == parsedUserId);
+        var user = await context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
         if (user is null)
         {
@@ -25,4 +25,7 @@ public sealed class UserRepository(ApplicationDbContext context)
 
         return Result.Success(user);
     }
+
+    public Task<User?> GetByUserNameAsync(string username) => throw new NotImplementedException();
+    public Task<User?> GetUserByEmailAsync(string email) => throw new NotImplementedException();
 }

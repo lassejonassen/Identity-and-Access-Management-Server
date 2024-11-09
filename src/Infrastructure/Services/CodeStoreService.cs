@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Concurrent;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using Domain.Modules.Clients;
 using Domain.Modules.OAuth;
 using Infrastructure.Abstractions.Services;
@@ -17,7 +12,7 @@ public class CodeStoreService : ICodeStoreService
     private readonly ConcurrentDictionary<string, AuthorizationCode> _codeIssued = new ConcurrentDictionary<string, AuthorizationCode>();
     private readonly ClientStore _clientStore = new ClientStore();
 
-    public string GenerateAuthorizationCode(AuthorizationCode authorizationCode)
+    public string? GenerateAuthorizationCode(AuthorizationCode authorizationCode)
     {
         var client = _clientStore.Clients.Where(x => x.ClientId.ToString() == authorizationCode.ClientId).SingleOrDefault();
 
@@ -35,7 +30,7 @@ public class CodeStoreService : ICodeStoreService
         return null;
     }
 
-    public AuthorizationCode GetClientDataByCode(string key)
+    public AuthorizationCode? GetClientDataByCode(string key)
     {
         AuthorizationCode authorizationCode;
         if (_codeIssued.TryGetValue(key, out authorizationCode))
@@ -45,16 +40,20 @@ public class CodeStoreService : ICodeStoreService
         return null;
     }
 
-    public AuthorizationCode RemoveClientDataByCode(string key)
+    public AuthorizationCode? RemoveClientDataByCode(string key)
     {
-        AuthorizationCode authorizationCode;
-        var isRemoved = _codeIssued.TryRemove(key, out authorizationCode);
+
+        var isRemoved = _codeIssued.TryRemove(key, out AuthorizationCode? authorizationCode);
+
         if (isRemoved)
+        {
             return authorizationCode;
+        }
+
         return null;
     }
 
-    public AuthorizationCode UpdatedClientDataByCode(string key, ClaimsPrincipal claimsPrincipal, IList<string> requestdScopes)
+    public AuthorizationCode? UpdatedClientDataByCode(string key, ClaimsPrincipal claimsPrincipal, IList<string> requestdScopes)
     {
         var oldValue = GetClientDataByCode(key);
 
@@ -69,7 +68,9 @@ public class CodeStoreService : ICodeStoreService
                                    select m).ToList();
 
                 if (!clientScope.Any())
+                {
                     return null;
+                }
 
                 AuthorizationCode newValue = new AuthorizationCode
                 {
@@ -83,10 +84,14 @@ public class CodeStoreService : ICodeStoreService
                     CodeChallengeMethod = oldValue.CodeChallengeMethod,
                     Subject = claimsPrincipal,
                 };
+
                 var result = _codeIssued.TryUpdate(key, newValue, oldValue);
 
                 if (result)
+                {
                     return newValue;
+                }
+
                 return null;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain.Modules.OAuth;
 using Domain.Modules.Users;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Persistence.DbContexts;
 
@@ -11,6 +12,5 @@ public sealed class ApplicationDbContext : IdentityDbContext<User>
     }
 
     public DbSet<OAuthToken> OAuthTokens { get; set; }
-    public DbSet<User> Users { get; set; }
 }
 
