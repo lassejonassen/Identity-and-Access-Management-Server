@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Domain.Modules.OAuth;
 
-namespace Infrastructure.Abstractions.Services;
+namespace Infrastructure.Services.Interfaces;
 
 public interface ICodeStoreService
 {

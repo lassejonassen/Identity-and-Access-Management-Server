@@ -1,8 +1,8 @@
 ﻿using Common.Devices;
 using Domain.Modules.Devices;
-using Infrastructure.Abstractions.Services;
-using Infrastructure.Abstractions.Validations;
 using Infrastructure.Options;
+using Infrastructure.Services.Interfaces;
+using Infrastructure.Validations.DeviceAuthorization;
 using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Services;

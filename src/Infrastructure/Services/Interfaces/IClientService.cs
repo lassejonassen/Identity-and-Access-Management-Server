@@ -2,7 +2,7 @@
 using Domain.Modules.Clients;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Application.Abstractions.Services;
+namespace Infrastructure.Services.Interfaces;
 
 public interface IClientService
 {

@@ -1,6 +1,6 @@
 ﻿using Common.Tokens;
 
-namespace Infrastructure.Abstractions.Services;
+namespace Infrastructure.Services.Interfaces;
 
 public interface ITokenIntrospectionService
 {

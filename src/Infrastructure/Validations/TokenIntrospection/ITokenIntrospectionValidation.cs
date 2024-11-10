@@ -1,7 +1,6 @@
 ﻿using Common.Tokens;
-using Infrastructure.Validations.TokenIntrospection;
 
-namespace Infrastructure.Abstractions.Validations;
+namespace Infrastructure.Validations.TokenIntrospection;
 
 public interface ITokenIntrospectionValidation
 {

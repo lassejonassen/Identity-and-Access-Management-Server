@@ -1,5 +1,5 @@
 ﻿using Common.Devices;
-using Infrastructure.Abstractions.Services;
+using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;

@@ -1,7 +1,7 @@
 ﻿using Abstractions;
 using Common.Tokens;
 using Domain.Modules.OAuth;
-using Infrastructure.Abstractions.Services;
+using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Services;
