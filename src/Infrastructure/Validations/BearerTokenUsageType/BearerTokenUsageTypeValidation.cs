@@ -1,5 +1,4 @@
 ﻿using Abstractions;
-using Infrastructure.Abstractions.Validations;
 using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Validations.BearerTokenUsageType;

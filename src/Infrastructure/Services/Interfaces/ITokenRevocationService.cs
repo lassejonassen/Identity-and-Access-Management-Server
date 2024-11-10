@@ -1,7 +1,7 @@
 ﻿using Common.Tokens;
 using Microsoft.AspNetCore.Http;
 
-namespace Infrastructure.Abstractions.Services;
+namespace Infrastructure.Services.Interfaces;
 
 public interface ITokenRevocationService
 {

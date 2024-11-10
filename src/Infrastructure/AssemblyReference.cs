@@ -1,10 +1,9 @@
 ﻿using Application.Abstractions.Services;
 using Domain.Modules.Users;
-using Infrastructure.Abstractions.Services;
-using Infrastructure.Abstractions.Validations;
 using Infrastructure.Ldap;
 using Infrastructure.Options;
 using Infrastructure.Services;
+using Infrastructure.Services.Interfaces;
 using Infrastructure.Validations.BearerTokenUsageType;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

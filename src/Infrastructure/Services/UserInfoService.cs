@@ -2,8 +2,9 @@
 using System.Security.Cryptography;
 using Application.Abstractions.Services;
 using Application.Contracts.Users;
-using Infrastructure.Abstractions.Validations;
 using Infrastructure.Options;
+using Infrastructure.Services.Interfaces;
+using Infrastructure.Validations.BearerTokenUsageType;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

@@ -3,7 +3,6 @@ using Abstractions;
 using Common.Clients;
 using Common.Tokens;
 using Domain.Modules.Clients;
-using Infrastructure.Abstractions.Validations;
 using Infrastructure.Enumerations;
 using Microsoft.AspNetCore.Http;
 

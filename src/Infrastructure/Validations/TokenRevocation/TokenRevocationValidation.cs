@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using Common.Clients;
 using Domain.Modules.Clients;
-using Infrastructure.Abstractions.Validations;
 using Infrastructure.Enumerations;
 using Microsoft.AspNetCore.Http;
 using Persistence.DbContexts;

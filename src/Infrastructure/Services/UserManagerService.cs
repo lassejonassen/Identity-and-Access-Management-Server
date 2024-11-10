@@ -1,6 +1,6 @@
 ﻿using Common;
 using Domain.Modules.Users;
-using Infrastructure.Abstractions.Services;
+using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 

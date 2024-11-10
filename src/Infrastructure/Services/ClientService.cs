@@ -4,6 +4,7 @@ using Application.Abstractions.Services;
 using Common.Clients;
 using Domain.Modules.Clients;
 using Infrastructure.Enumerations;
+using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using Persistence.DbContexts;
@@ -72,7 +73,7 @@ public sealed class ClientService : IClientService
         {
             var data = _httpContextAccessor.HttpContext;
             var authHeader = data?.Request.Headers["Authorization"].ToString();
-            
+
             if (authHeader == null)
             {
                 return result;

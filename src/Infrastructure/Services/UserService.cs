@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using Abstractions;
 using Application.Abstractions.Services;
-using Azure.Core;
 using Common;
 using Domain.Modules.Users;
 using Microsoft.AspNetCore.Authentication;

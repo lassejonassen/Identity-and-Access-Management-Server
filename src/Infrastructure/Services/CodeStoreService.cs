@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using Domain.Modules.Clients;
 using Domain.Modules.OAuth;
-using Infrastructure.Abstractions.Services;
+using Infrastructure.Services.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Infrastructure.Services;

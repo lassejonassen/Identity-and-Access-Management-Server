@@ -1,5 +1,5 @@
 ﻿using Application.Abstractions.Services;
-using Infrastructure.Abstractions.Validations;
+using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Validations.DeviceAuthorization;

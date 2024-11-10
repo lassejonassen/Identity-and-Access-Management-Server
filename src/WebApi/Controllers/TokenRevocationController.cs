@@ -1,5 +1,5 @@
-﻿using Infrastructure.Abstractions.Services;
-using Infrastructure.Abstractions.Validations;
+﻿using Infrastructure.Services.Interfaces;
+using Infrastructure.Validations.TokenRevocation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;

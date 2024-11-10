@@ -1,7 +1,7 @@
 ﻿using Common;
 using Microsoft.AspNetCore.Http;
 
-namespace Infrastructure.Abstractions.Services;
+namespace Infrastructure.Services.Interfaces;
 
 public interface IAuthorizeResultService
 {

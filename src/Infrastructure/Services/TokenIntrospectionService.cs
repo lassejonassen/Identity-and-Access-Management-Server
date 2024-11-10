@@ -3,8 +3,8 @@ using System.Security.Claims;
 using Common.Tokens;
 using Domain.Modules.Clients;
 using Domain.Modules.OAuth;
-using Infrastructure.Abstractions.Services;
-using Infrastructure.Abstractions.Validations;
+using Infrastructure.Services.Interfaces;
+using Infrastructure.Validations.TokenIntrospection;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Infrastructure.Services;
