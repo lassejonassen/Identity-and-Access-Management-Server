@@ -1,8 +1,9 @@
 ﻿using System.Security.Claims;
 using Abstractions;
-using Application.Abstractions.Services;
-using Common;
+using Application.Contracts;
+using Application.Contracts.Responses;
 using Domain.Modules.Users;
+using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

@@ -1,6 +1,6 @@
 ﻿using Domain.Modules.Clients;
 
-namespace Common.Clients;
+namespace Application.Contracts.Clients;
 
 public sealed class CheckClientResult
 {

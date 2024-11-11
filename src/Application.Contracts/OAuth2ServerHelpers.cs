@@ -9,7 +9,7 @@
 using System.Collections.Generic;
 using Abstractions;
 
-namespace Common
+namespace Application.Contracts
 {
     public class OAuth2ServerHelpers
     {

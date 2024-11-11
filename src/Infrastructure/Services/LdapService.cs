@@ -1,4 +1,4 @@
-﻿using Application.Abstractions.Services;
+﻿using Infrastructure.Services.Interfaces;
 
 namespace Infrastructure.Services;
 

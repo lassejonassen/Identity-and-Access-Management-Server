@@ -1,5 +1,4 @@
-﻿using Application.Abstractions.Services;
-using Domain.Modules.Users;
+﻿using Domain.Modules.Users;
 using Infrastructure.Ldap;
 using Infrastructure.Options;
 using Infrastructure.Services;

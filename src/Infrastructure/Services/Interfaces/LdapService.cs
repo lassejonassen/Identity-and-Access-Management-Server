@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Abstractions.Services;
+namespace Infrastructure.Services.Interfaces;
 
 public interface ILdapService
 {

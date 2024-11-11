@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Common.Tokens;
+using Application.Contracts.Responses;
+using Application.Contracts.Tokens;
 using Domain.Modules.Clients;
 using Domain.Modules.OAuth;
 using Infrastructure.Services.Interfaces;

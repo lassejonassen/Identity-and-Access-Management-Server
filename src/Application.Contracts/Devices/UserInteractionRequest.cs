@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Devices;
+namespace Application.Contracts.Devices;
 
 public class UserInteractionRequest
 {

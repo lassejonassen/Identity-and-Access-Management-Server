@@ -1,4 +1,4 @@
-﻿namespace Common.Tokens;
+﻿namespace Application.Contracts.Responses;
 
 public class TokenIntrospectionResponse
 {

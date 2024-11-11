@@ -1,5 +1,4 @@
 ﻿using Domain.Modules.Clients;
-using Infrastructure.Abstractions.Validations;
 
 namespace Infrastructure.Validations.TokenRevocation;
 

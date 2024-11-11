@@ -1,5 +1,4 @@
 ﻿using Application.Abstractions.Services;
-using Application.Contracts.Users;
 
 namespace Application.Users.Queries.GetUserInfo;
 

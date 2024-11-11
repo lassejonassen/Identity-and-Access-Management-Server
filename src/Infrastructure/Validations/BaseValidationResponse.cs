@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Abstractions.Validations;
+﻿namespace Infrastructure.Validations;
 
 public abstract class BaseValidationResponse
 {

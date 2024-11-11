@@ -1,4 +1,5 @@
-﻿using Common.Tokens;
+﻿using Application.Contracts.Responses;
+using Application.Contracts.Tokens;
 
 namespace Infrastructure.Services.Interfaces;
 

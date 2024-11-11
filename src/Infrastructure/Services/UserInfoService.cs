@@ -1,7 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
-using Application.Abstractions.Services;
-using Application.Contracts.Users;
+using Application.Contracts.Responses;
 using Infrastructure.Options;
 using Infrastructure.Services.Interfaces;
 using Infrastructure.Validations.BearerTokenUsageType;

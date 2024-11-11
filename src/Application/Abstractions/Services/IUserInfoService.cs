@@ -1,6 +1,6 @@
 ﻿using Application.Contracts.Responses;
 
-namespace Infrastructure.Services.Interfaces;
+namespace Application.Abstractions.Services;
 
 public interface IUserInfoService
 {

@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using Application.Contracts;
+using Application.Contracts.Responses;
 using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Services.Interfaces;

@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Domain.Modules.Users;
 
-namespace Common;
+namespace Application.Contracts.Responses;
 
 public class OpenIdConnectLoginResponse
 {

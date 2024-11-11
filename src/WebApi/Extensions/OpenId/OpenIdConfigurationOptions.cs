@@ -1,6 +1,6 @@
-﻿namespace Common;
+﻿namespace WebApi.Extensions.OpenId;
 
-public class OpenIdConfiguration
+public class OpenIdConfigurationOptions
 {
     public string issuer { get; set; }
     public string authorization_endpoint { get; set; }

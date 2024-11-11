@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 
-namespace Common
+namespace Application.Contracts
 {
     public static class ExtensionMethods
     {
         public static string GetEnumDescription(this Enum en)
         {
-            if (en == null) return null;
+            if (en == null)
+                return null;
 
             var type = en.GetType();
 
@@ -21,7 +22,8 @@ namespace Common
 
         public static bool IsRedirectUriStartWithHttps(this string redirectUri)
         {
-            if(redirectUri != null && redirectUri.StartsWith("https")) return true;
+            if (redirectUri != null && redirectUri.StartsWith("https"))
+                return true;
 
             return false;
         }

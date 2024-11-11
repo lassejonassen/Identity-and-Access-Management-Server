@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using Common.Clients;
+using Application.Contracts.Clients;
 using Domain.Modules.Clients;
 using Infrastructure.Enumerations;
 using Microsoft.AspNetCore.Http;

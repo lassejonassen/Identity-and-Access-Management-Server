@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Common.Devices;
+namespace Application.Contracts.Responses;
 
 public class DeviceAuthorizationResponse
 {

@@ -1,4 +1,4 @@
-﻿using Common.Clients;
+﻿using Application.Contracts.Clients;
 using Domain.Modules.Clients;
 using Microsoft.IdentityModel.Tokens;
 

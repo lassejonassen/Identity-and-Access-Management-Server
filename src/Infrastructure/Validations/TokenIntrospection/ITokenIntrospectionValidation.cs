@@ -1,4 +1,4 @@
-﻿using Common.Tokens;
+﻿using Application.Contracts.Tokens;
 
 namespace Infrastructure.Validations.TokenIntrospection;
 

@@ -1,4 +1,4 @@
-﻿using Common.Tokens;
+﻿using Application.Contracts.Responses;
 using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Services.Interfaces;

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Application.Contracts.Users;
+namespace Application.Contracts.Responses;
 
 public sealed class UserInfoResponse
 {
