@@ -1,4 +1,4 @@
-﻿namespace Common;
+﻿namespace Application.Contracts;
 
 public class OpenIdConnectLoginRequest
 {
@@ -10,6 +10,6 @@ public class OpenIdConnectLoginRequest
 
     public bool IsValid()
     {
-        return (UserName != null && Password != null && Code != null && RedirectUri != null);
+        return UserName != null && Password != null && Code != null && RedirectUri != null;
     }
 }

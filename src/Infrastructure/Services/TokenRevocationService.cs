@@ -1,5 +1,5 @@
 ﻿using Abstractions;
-using Common.Tokens;
+using Application.Contracts.Responses;
 using Domain.Modules.OAuth;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http;

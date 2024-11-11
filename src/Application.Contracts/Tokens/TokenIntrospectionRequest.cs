@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Common.Tokens;
+namespace Application.Contracts.Tokens;
 
 /// <summary>
 /// Object define the token introspection request.

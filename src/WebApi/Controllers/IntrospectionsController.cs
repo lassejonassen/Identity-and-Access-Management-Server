@@ -1,4 +1,4 @@
-﻿using Common.Tokens;
+﻿using Application.Contracts.Tokens;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

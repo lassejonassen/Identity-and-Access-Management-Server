@@ -1,4 +1,4 @@
-﻿using Common.Devices;
+﻿using Application.Contracts.Responses;
 using Domain.Modules.Devices;
 using Infrastructure.Options;
 using Infrastructure.Services.Interfaces;

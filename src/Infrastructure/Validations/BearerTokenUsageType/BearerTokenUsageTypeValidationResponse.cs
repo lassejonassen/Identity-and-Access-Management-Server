@@ -1,6 +1,4 @@
-﻿using Infrastructure.Abstractions.Validations;
-
-namespace Infrastructure.Validations.BearerTokenUsageType;
+﻿namespace Infrastructure.Validations.BearerTokenUsageType;
 
 public class BearerTokenUsageTypeValidationResponse : BaseValidationResponse
 {

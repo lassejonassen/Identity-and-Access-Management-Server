@@ -1,23 +1,26 @@
-﻿using Common;
+﻿using Application.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using WebApi.Extensions.OpenId;
 
 namespace WebApi.Controllers;
 
 [Route("api/discovery")]
 [ApiController]
-public class DiscoveryEndpointController(IConfiguration configuration) : ControllerBase
+public class DiscoveryEndpointController(IOptionsSnapshot<OpenIdConfigurationOptions> options) : ControllerBase
 {
+    private readonly OpenIdConfigurationOptions _options = options.Value;
+
     [HttpGet(".well-known/openid-configuration")]
     public IActionResult GetConfiguration()
     {
-        var response = configuration.GetValue<OpenIdConfiguration>("AppSettings:OpenIdConfiguration");
-        return Ok(response);
+        return Ok(_options);
     }
 
     [HttpGet("jwks")]
     public IActionResult GetJwks()
     {
-        var response = configuration.GetValue<Jwk>("AppSettings:Jwks");
-        return Ok(response);
+        //var response = configuration.GetValue<Jwk>("AppSettings:Jwks");
+        return Ok("response");
     }
 }

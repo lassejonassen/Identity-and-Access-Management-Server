@@ -1,8 +1,9 @@
 ﻿using Abstractions;
-using Common;
+using Application.Contracts;
+using Application.Contracts.Responses;
 using Domain.Modules.Users;
 
-namespace Application.Abstractions.Services;
+namespace Infrastructure.Services.Interfaces;
 
 public interface IUserService
 {

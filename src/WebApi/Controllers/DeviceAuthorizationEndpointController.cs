@@ -1,4 +1,4 @@
-﻿using Common.Devices;
+﻿using Application.Contracts.Devices;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

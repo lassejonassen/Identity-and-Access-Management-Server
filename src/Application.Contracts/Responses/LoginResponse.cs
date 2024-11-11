@@ -1,9 +1,10 @@
-﻿namespace Common.Tokens;
+﻿namespace Application.Contracts.Responses;
 
-public class TokenRecovationResponse
+public class LoginResponse
 {
     public bool Succeeded { get; set; }
     public string Error { get; set; } = string.Empty;
+
     public string ErrorDescription { get; set; }
     public bool HasError => !string.IsNullOrEmpty(Error);
 }

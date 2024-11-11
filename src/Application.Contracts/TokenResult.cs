@@ -1,4 +1,4 @@
-﻿namespace Common;
+﻿namespace Application.Contracts;
 
 public class TokenResult
 {

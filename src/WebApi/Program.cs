@@ -4,6 +4,7 @@ using Infrastructure;
 using Persistence;
 using Serilog;
 using WebApi.Extensions.Logging;
+using WebApi.Extensions.OpenId;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddInfrastructure()
 builder.Services.AddAuthentication();
 
 builder.AddLogging();
+builder.Services.ConfigureOpenIdOptions();
 
 builder.Services.AddHttpContextAccessor();
 

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Abstractions;
-using Common.Clients;
-using Common.Tokens;
+using Application.Contracts.Clients;
+using Application.Contracts.Tokens;
 using Domain.Modules.Clients;
 using Infrastructure.Enumerations;
 using Microsoft.AspNetCore.Http;

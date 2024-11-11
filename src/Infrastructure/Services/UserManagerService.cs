@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using Application.Contracts;
+using Application.Contracts.Responses;
 using Domain.Modules.Users;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;

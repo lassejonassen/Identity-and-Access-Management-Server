@@ -1,7 +1,5 @@
 ﻿using System.Text;
-using Abstractions;
-using Application.Abstractions.Services;
-using Common.Clients;
+using Application.Contracts.Clients;
 using Domain.Modules.Clients;
 using Infrastructure.Enumerations;
 using Infrastructure.Services.Interfaces;
